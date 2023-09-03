@@ -1,11 +1,11 @@
 local sniphpets = require('sniphpets-luasnip')
+local prefix = sniphpets.config.common.prefix
 local basename = sniphpets.basename
 local namespace = sniphpets.namespace
-local opts = sniphpets.opts.common
 
 return {
   s(
-    opts.prefix .. 'class',
+    prefix .. 'class',
     fmt(
       [[
     <?php

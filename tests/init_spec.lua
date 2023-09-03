@@ -1,7 +1,7 @@
 local sniphpets = require('sniphpets-luasnip')
 
 describe('sniphpets-luasnip', function()
-  describe('path_to_fqn', function()
+  describe('path_to_fqn()', function()
     local path_to_fqn = sniphpets.path_to_fqn
 
     it('returns namespace prefix when fails', function()

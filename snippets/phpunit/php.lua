@@ -1,12 +1,12 @@
 local sniphpets = require('sniphpets-luasnip')
 local phpunit = require('sniphpets-luasnip.phpunit')
+local prefix = sniphpets.config.phpunit.prefix
 local basename = sniphpets.basename
 local namespace = phpunit.namespace
-local opts = sniphpets.opts.phpunit
 
 return {
   s(
-    opts.prefix .. 'case',
+    prefix .. 'case',
     fmt(
       [[
     <?php

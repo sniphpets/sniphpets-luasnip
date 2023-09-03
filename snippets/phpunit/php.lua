@@ -1,14 +1,14 @@
-local sniphpets = require("sniphpets-luasnip")
-local phpunit = require("sniphpets-luasnip.phpunit")
+local sniphpets = require('sniphpets-luasnip')
+local phpunit = require('sniphpets-luasnip.phpunit')
 local basename = sniphpets.basename
 local namespace = phpunit.namespace
 local opts = sniphpets.opts.phpunit
 
 return {
-	s(
-		opts.prefix .. "case",
-		fmt(
-			[[
+  s(
+    opts.prefix .. 'case',
+    fmt(
+      [[
     <?php
 
     namespace @#;
@@ -20,8 +20,8 @@ return {
         @#
     }
     ]],
-			{ f(namespace), f(basename), i(0) },
-			{ delimiters = "@#" }
-		)
-	),
+      { f(namespace), f(basename), i(0) },
+      { delimiters = '@#' }
+    )
+  ),
 }

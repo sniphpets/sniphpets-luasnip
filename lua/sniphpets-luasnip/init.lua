@@ -29,14 +29,11 @@ end
 function M.path_to_fqn(path, namespace_prefix)
   namespace_prefix = namespace_prefix or ''
 
-  local fqn = path:gsub('.php$', ''):gsub('/', '\\')
+  local fqn = path:gsub('.php$', ''):gsub('/', '\\'):gsub('^.*\\%l[^\\]*\\?', '')
 
-  local i = fqn:find('\\%u')
-  if i == nil then
+  if fqn == '' then
     return namespace_prefix
   end
-
-  fqn = fqn:sub(i + 1, -1)
 
   if namespace_prefix == '' then
     return fqn

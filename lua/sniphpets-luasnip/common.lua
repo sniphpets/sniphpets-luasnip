@@ -6,6 +6,10 @@ function M.basename()
   return vim.fn.expand('%:t:r')
 end
 
+function M.fqn()
+  return M.path_to_fqn(M.filepath(), config.namespace_prefix)
+end
+
 function M.namespace()
   return M.path_to_namespace(M.filepath(), config.namespace_prefix)
 end

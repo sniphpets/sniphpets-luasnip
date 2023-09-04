@@ -15,6 +15,7 @@ local defaults = {
     enabled = false,
     prefix = 'pu',
     namespace_prefix = 'App\\Tests',
+    test_suffix = 'Test',
   },
   doctrine = {
     enabled = false,

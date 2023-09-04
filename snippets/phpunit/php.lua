@@ -1,7 +1,8 @@
-local sniphpets = require('sniphpets-luasnip')
+local config = require('sniphpets-luasnip').config()
+local common = require('sniphpets-luasnip.common')
 local phpunit = require('sniphpets-luasnip.phpunit')
-local prefix = sniphpets.config.phpunit.prefix
-local basename = sniphpets.basename
+local prefix = config.phpunit.prefix
+local basename = common.basename
 local namespace = phpunit.namespace
 
 return {

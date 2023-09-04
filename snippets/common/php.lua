@@ -1,7 +1,8 @@
-local sniphpets = require('sniphpets-luasnip')
-local prefix = sniphpets.config.common.prefix
-local basename = sniphpets.basename
-local namespace = sniphpets.namespace
+local config = require('sniphpets-luasnip').config()
+local common = require('sniphpets-luasnip.common')
+local prefix = config.common.prefix
+local basename = common.basename
+local namespace = common.namespace
 
 return {
   s(

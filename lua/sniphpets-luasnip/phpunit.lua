@@ -1,12 +1,10 @@
-local sniphpets = require('sniphpets-luasnip')
+local config = require('sniphpets-luasnip').config()
+local common = require('sniphpets-luasnip.common')
 
 local M = {}
 
 function M.namespace()
-  return sniphpets.path_to_namespace(
-    sniphpets.filepath(),
-    sniphpets.config.phpunit.namespace_prefix
-  )
+  return common.path_to_namespace(common.filepath(), config.phpunit.namespace_prefix)
 end
 
 return M

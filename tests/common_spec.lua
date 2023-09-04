@@ -1,8 +1,8 @@
-local sniphpets = require('sniphpets-luasnip')
+local common = require('sniphpets-luasnip.common')
 
 describe('sniphpets-luasnip', function()
   describe('path_to_fqn()', function()
-    local path_to_fqn = sniphpets.path_to_fqn
+    local path_to_fqn = common.path_to_fqn
 
     it('returns namespace prefix when fails', function()
       assert.are.same('App', path_to_fqn('/home/user/projects/my-app/classes/app.php', 'App'))

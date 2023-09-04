@@ -24,13 +24,7 @@ local defaults = {
 }
 
 function M.create_config(opts)
-  local config = vim.tbl_deep_extend('force', vim.deepcopy(defaults), opts or {})
-
-  return setmetatable(config, {
-    __newindex = function()
-      error('Config is read only.')
-    end,
-  })
+  return vim.tbl_deep_extend('force', vim.deepcopy(defaults), opts or {})
 end
 
 return M

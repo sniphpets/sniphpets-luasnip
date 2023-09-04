@@ -1,4 +1,4 @@
-local config = require('sniphpets-luasnip').config()
+local config = require('sniphpets-luasnip').config
 
 local M = {}
 

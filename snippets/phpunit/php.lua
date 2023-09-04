@@ -1,4 +1,4 @@
-local config = require('sniphpets-luasnip').config()
+local config = require('sniphpets-luasnip').config
 local common = require('sniphpets-luasnip.common')
 local phpunit = require('sniphpets-luasnip.phpunit')
 local prefix = config.phpunit.prefix

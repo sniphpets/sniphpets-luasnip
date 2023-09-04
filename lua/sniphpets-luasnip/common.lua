@@ -44,4 +44,14 @@ function M.path_to_fqn(path, namespace_prefix)
   return namespace_prefix .. '\\' .. fqn
 end
 
+function M.file_header()
+  local header = '<?php\n\n'
+
+  if config.strict_types then
+    header = header .. 'declare(strict_types=1);\n\n'
+  end
+
+  return header
+end
+
 return M

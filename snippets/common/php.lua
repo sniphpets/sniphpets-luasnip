@@ -3,23 +3,18 @@ local common = require('sniphpets-luasnip.common')
 local prefix = config.common.prefix
 local basename = common.basename
 local namespace = common.namespace
+local file_header = common.file_header()
 
 return {
   s(
     prefix .. 'class',
-    fmt(
-      [[
-    <?php
+    fmt(file_header .. [[
+namespace @#;
 
-    namespace @#;
-
-    class @#
-    {
-        @#
-    }
-    ]],
-      { f(namespace), f(basename), i(0) },
-      { delimiters = '@#' }
-    )
+class @#
+{
+    @#
+}
+    ]], { f(namespace), f(basename), i(0) }, { delimiters = '@#' })
   ),
 }

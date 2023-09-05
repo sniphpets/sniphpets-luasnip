@@ -62,7 +62,7 @@ function M.path_to_fqn(path, namespace_prefix)
 end
 
 function M.file_header()
-  local header = '<?php\n\n'
+  local header = config.file_header
 
   if config.strict_types then
     header = header .. 'declare(strict_types=1);\n\n'
@@ -70,5 +70,4 @@ function M.file_header()
 
   return header
 end
-
 return M

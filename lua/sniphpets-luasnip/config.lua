@@ -1,6 +1,7 @@
 local M = {}
 
 local defaults = {
+  file_header = '<?php\n\n',
   namespace_prefix = 'App',
   strict_types = false,
   final_classes = false,

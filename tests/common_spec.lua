@@ -3,6 +3,7 @@ local config = require('sniphpets-luasnip').config
 
 describe('sniphpets-luasnip', function()
   before_each(function()
+    config.file_header = '<?php\n\n'
     config.strict_types = false
     config.final_classes = false
   end)
@@ -78,8 +79,13 @@ describe('sniphpets-luasnip', function()
   describe('file_header()', function()
     local file_header = common.file_header
 
-    it('returns file header', function()
+    it('returns file header by default', function()
       assert.are.same('<?php\n\n', file_header())
+    end)
+
+    it('allows to set custom file header', function()
+      config.file_header = '<?php // Custom header\n\n'
+      assert.are.same('<?php // Custom header\n\n', file_header())
     end)
 
     it('enables strict types', function()

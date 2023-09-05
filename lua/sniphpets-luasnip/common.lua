@@ -2,6 +2,23 @@ local config = require('sniphpets-luasnip').config
 
 local M = {}
 
+function M.base()
+  local basename = M.basename()
+  local type = 'class'
+
+  if basename:match('Interface$') then
+    type = 'interface'
+  elseif basename:match('Trait$') then
+    type = 'trait'
+  elseif basename:match('^Abstract') then
+    type = 'abstract class'
+  elseif config.final_classes then
+    type = 'final class'
+  end
+
+  return type .. ' ' .. basename
+end
+
 function M.basename()
   return vim.fn.expand('%:t:r')
 end

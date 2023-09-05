@@ -1,8 +1,9 @@
 local M = {}
 
 local defaults = {
-  strict_types = false,
   namespace_prefix = 'App',
+  strict_types = false,
+  final_classes = false,
   common = {
     enabled = true,
     prefix = '',

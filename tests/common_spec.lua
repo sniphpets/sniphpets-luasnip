@@ -4,6 +4,7 @@ local config = require('sniphpets-luasnip').config
 describe('sniphpets-luasnip', function()
   before_each(function()
     config.strict_types = false
+    config.final_classes = false
   end)
 
   describe('path_to_fqn()', function()
@@ -30,6 +31,47 @@ describe('sniphpets-luasnip', function()
           'MyApp'
         )
       )
+    end)
+  end)
+
+  describe('base()', function()
+    local base = common.base
+
+    local basename = ''
+    common.basename = function()
+      return basename
+    end
+
+    it('uses "class" by default', function()
+      basename = 'User'
+      assert.are.same('class User', base())
+    end)
+
+    it('makes class final if needed', function()
+      config.final_classes = true
+      basename = 'User'
+      assert.are.same('final class User', base())
+    end)
+
+    it('detects abstract classes', function()
+      basename = 'AbstractUser'
+      assert.are.same('abstract class AbstractUser', base())
+    end)
+
+    it('never makes abstract class final', function()
+      config.final_classes = true
+      basename = 'AbstractUser'
+      assert.are.same('abstract class AbstractUser', base())
+    end)
+
+    it('detects interfaces', function()
+      basename = 'UserInterface'
+      assert.are.same('interface UserInterface', base())
+    end)
+
+    it('detects traits', function()
+      basename = 'UserTrait'
+      assert.are.same('trait UserTrait', base())
     end)
   end)
 

@@ -70,4 +70,41 @@ function M.file_header()
 
   return header
 end
+
+function M.method_visibility(_, snip)
+  return M.visibility(snip.captures[1], 'public')
+end
+
+function M.property_visibility(_, snip)
+  return M.visibility(snip.captures[1], 'private')
+end
+
+function M.visibility(mode, default)
+  local vis = default or 'public'
+
+  if mode:match('u') then
+    vis = 'public'
+  elseif mode:match('o') then
+    vis = 'protected'
+  elseif mode:match('i') then
+    vis = 'private'
+  end
+
+  if mode:match('s') then
+    vis = vis .. ' static'
+  end
+
+  if mode:match('r') then
+    vis = vis .. ' readonly'
+  end
+
+  if mode:match('f') then
+    vis = 'final ' .. vis
+  elseif mode:match('a') then
+    vis = 'abstract ' .. vis
+  end
+
+  return vis
+end
+
 return M

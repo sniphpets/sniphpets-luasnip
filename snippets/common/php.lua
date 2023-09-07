@@ -6,6 +6,7 @@ local base = common.base
 local namespace = common.namespace
 local method_visibility = common.method_visibility
 local property_visibility = common.property_visibility
+local visual = common.visual
 local file_header = common.file_header()
 
 return {
@@ -20,9 +21,9 @@ namespace @#;
 
 @#
 {
-    @#
+    @#@#
 }
-    ]], { f(namespace), f(base), i(0) }, { delimiters = '@#' }),
+    ]], { f(namespace), f(base), f(visual), i(0) }, { delimiters = '@#' }),
     { condition = conds_expand.line_begin }
   ),
 
@@ -33,9 +34,9 @@ namespace @#;
 
 @#
 {
-    @#
+    @#@#
 }
-    ]], { f(namespace), f(base), i(0) }, { delimiters = '@#' }),
+    ]], { f(namespace), f(base), f(visual), i(0) }, { delimiters = '@#' }),
     { condition = conds_expand.line_begin }
   ),
 
@@ -45,10 +46,10 @@ namespace @#;
       [[
  public function __construct(@#)
  {
-    @#
+    @#@#
  }
   ]],
-      { i(1), i(0) },
+      { i(1), f(visual), i(0) },
       { delimiters = '@#' }
     ),
     { condition = conds_expand.line_begin }
@@ -60,10 +61,10 @@ namespace @#;
       [[
  public function __@#(@#)
  {
-    @#
+    @#@#
  }
   ]],
-      { i(1, 'toString'), i(2), i(0) },
+      { i(1, 'toString'), i(2), f(visual), i(0) },
       { delimiters = '@#' }
     ),
     { condition = conds_expand.line_begin }
@@ -89,10 +90,10 @@ f: final
       [[
  @# function @#(@#): @#
  {
-    @#
+    @#@#
  }
   ]],
-      { f(method_visibility), i(1), i(2), i(3, 'void'), i(0) },
+      { f(method_visibility), i(1), i(2), i(3, 'void'), f(visual), i(0) },
       { delimiters = '@#' }
     ),
     { condition = conds_expand.line_begin }

@@ -19,6 +19,9 @@ function M.setup(opts)
   if M.config.symfony.enabled then
     table.insert(paths, snippets_path .. '/symfony')
   end
+  if M.config.laravel.enabled then
+    table.insert(paths, snippets_path .. '/laravel')
+  end
   if M.config.doctrine.enabled then
     table.insert(paths, snippets_path .. '/doctrine')
   end

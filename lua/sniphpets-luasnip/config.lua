@@ -13,10 +13,6 @@ local defaults = {
     enabled = false,
     prefix = 'sf',
   },
-  laravel = {
-    enabled = false,
-    prefix = 'la',
-  },
   phpunit = {
     enabled = false,
     prefix = 'pu',
@@ -26,6 +22,10 @@ local defaults = {
   doctrine = {
     enabled = false,
     prefix = 'dc',
+  },
+  eloquent = {
+    enabled = false,
+    prefix = 'el',
   },
 }
 

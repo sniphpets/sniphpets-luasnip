@@ -1,12 +1,12 @@
 local config = require('sniphpets-luasnip').config
 local common = require('sniphpets-luasnip.common')
 local conds_expand = require('luasnip.extras.conditions.expand')
-local prefix = config.laravel.prefix
+local prefix = config.eloquent.prefix
 local visual = common.visual
 
 return {
   s(
-    { trig = prefix .. 'scope', name = 'Laravel: Model scope', dscr = 'Laravel: Model scope' },
+    { trig = prefix .. 'scope', name = 'Eloquent: Model scope', dscr = 'Eloquent: Model scope' },
     fmt(
       [[
  public function scope@#(Builder $query@#): void
@@ -22,8 +22,8 @@ return {
   s(
     {
       trig = prefix .. 'has',
-      name = 'Laravel: Model HasOne/HasMany',
-      dscr = 'Laravel: Model HasOne/HasMany relation',
+      name = 'Eloquent: Model HasOne/HasMany',
+      dscr = 'Eloquent: Model HasOne/HasMany relation',
     },
     fmt(
       [[
@@ -40,8 +40,8 @@ return {
   s(
     {
       trig = prefix .. 'belongs',
-      name = 'Laravel: Model BelongsTo/BelongsToMany',
-      dscr = 'Laravel: Model BelongsTo/BelongsToMany relation',
+      name = 'Eloquent: Model BelongsTo/BelongsToMany',
+      dscr = 'Eloquent: Model BelongsTo/BelongsToMany relation',
     },
     fmt(
       [[

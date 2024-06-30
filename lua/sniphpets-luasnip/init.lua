@@ -19,11 +19,11 @@ function M.setup(opts)
   if M.config.symfony.enabled then
     table.insert(paths, snippets_path .. '/symfony')
   end
-  if M.config.eloquent.enabled then
-    table.insert(paths, snippets_path .. '/eloquent')
-  end
   if M.config.doctrine.enabled then
     table.insert(paths, snippets_path .. '/doctrine')
+  end
+  if M.config.eloquent.enabled then
+    table.insert(paths, snippets_path .. '/eloquent')
   end
 
   require('luasnip.loaders.from_lua').lazy_load({

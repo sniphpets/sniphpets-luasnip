@@ -33,9 +33,9 @@ use Illuminate\Database\Eloquent\Model;
       [[
  protected $fillable = [
      '@#',
- ];@#
+ ];
   ]],
-      { i(1), i(0) },
+      { i(1) },
       { delimiters = '@#' }
     ),
     { condition = conds_expand.line_begin }
@@ -47,9 +47,9 @@ use Illuminate\Database\Eloquent\Model;
       [[
  protected $guarded = [
      '@#',
- ];@#
+ ];
   ]],
-      { i(1), i(0) },
+      { i(1) },
       { delimiters = '@#' }
     ),
     { condition = conds_expand.line_begin }
@@ -64,9 +64,9 @@ use Illuminate\Database\Eloquent\Model;
      return [
          '@#' => '@#',
      ];
- }@#
+ }
   ]],
-      { i(1), i(2), i(0) },
+      { i(1), i(2) },
       { delimiters = '@#' }
     ),
     { condition = conds_expand.line_begin }
@@ -81,7 +81,49 @@ use Illuminate\Database\Eloquent\Model;
     $query->@#@#
  }
   ]],
-      { i(1), i(2), f(visual), i(0) },
+      { i(1), i(2), f(visual), i(3) },
+      { delimiters = '@#' }
+    ),
+    { condition = conds_expand.line_begin }
+  ),
+
+  s(
+    {
+      trig = prefix .. 'get',
+      name = 'Eloquent: Accessor',
+      dscr = 'Eloquent: Attribute accessor',
+    },
+    fmt(
+      [[
+ protected function @#(): Attribute
+ {
+    return Attribute::make(
+        get: fn (mixed $value, array $attributes) => @#,
+    );
+ }
+  ]],
+      { i(1), i(2) },
+      { delimiters = '@#' }
+    ),
+    { condition = conds_expand.line_begin }
+  ),
+
+  s(
+    {
+      trig = prefix .. 'set',
+      name = 'Eloquent: Mutator',
+      dscr = 'Eloquent: Attribute mutator',
+    },
+    fmt(
+      [[
+ protected function @#(): Attribute
+ {
+    return Attribute::make(
+        set: fn (mixed $value, array $attributes) => @#,
+    );
+ }
+  ]],
+      { i(1), i(2) },
       { delimiters = '@#' }
     ),
     { condition = conds_expand.line_begin }
@@ -100,7 +142,7 @@ use Illuminate\Database\Eloquent\Model;
     return $this->has@#(@#::class@#);
  }
   ]],
-      { i(1), rep(2), i(2), i(3), i(0) },
+      { i(1), rep(2), i(2), i(3), i(4) },
       { delimiters = '@#' }
     ),
     { condition = conds_expand.line_begin }
@@ -119,7 +161,39 @@ use Illuminate\Database\Eloquent\Model;
     return $this->belongsTo@#(@#::class@#);
  }
   ]],
-      { i(1), rep(2), i(2), i(3), i(0) },
+      { i(1), rep(2), i(2), i(3), i(4) },
+      { delimiters = '@#' }
+    ),
+    { condition = conds_expand.line_begin }
+  ),
+
+  s(
+    {
+      trig = prefix .. 'string',
+      name = 'Eloquent: $table->string',
+      dscr = 'Eloquent: $table->sting',
+    },
+    fmt(
+      [[
+ $table->string('@#')@#;
+  ]],
+      { i(1), i(2) },
+      { delimiters = '@#' }
+    ),
+    { condition = conds_expand.line_begin }
+  ),
+
+  s(
+    {
+      trig = prefix .. 'foreign',
+      name = 'Eloquent: $table->foreignId',
+      dscr = 'Eloquent: $table->foreignId',
+    },
+    fmt(
+      [[
+ $table->foreignId('@#_id')->constrained()@#;
+  ]],
+      { i(1), i(2) },
       { delimiters = '@#' }
     ),
     { condition = conds_expand.line_begin }

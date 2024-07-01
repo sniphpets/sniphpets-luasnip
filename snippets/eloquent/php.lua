@@ -32,10 +32,10 @@ use Illuminate\Database\Eloquent\Model;
     fmt(
       [[
  protected $fillable = [
-     '@#',
+     '@#',@#
  ];
   ]],
-      { i(1) },
+      { i(1), i(2) },
       { delimiters = '@#' }
     ),
     { condition = conds_expand.line_begin }
@@ -46,10 +46,28 @@ use Illuminate\Database\Eloquent\Model;
     fmt(
       [[
  protected $guarded = [
-     '@#',
+     '@#',@#
  ];
   ]],
-      { i(1) },
+      { i(1), i(2) },
+      { delimiters = '@#' }
+    ),
+    { condition = conds_expand.line_begin }
+  ),
+
+  s(
+    {
+      trig = prefix .. 'defaults',
+      name = 'Eloquent: $attributes',
+      dscr = 'Eloquent: Default values',
+    },
+    fmt(
+      [[
+ protected $attributes = [
+     '@#' => @#,@#
+ ];
+  ]],
+      { i(1), i(2), i(3) },
       { delimiters = '@#' }
     ),
     { condition = conds_expand.line_begin }
@@ -62,11 +80,11 @@ use Illuminate\Database\Eloquent\Model;
  protected function casts(): array
  {
      return [
-         '@#' => '@#',
+         '@#' => '@#',@#
      ];
  }
   ]],
-      { i(1), i(2) },
+      { i(1), i(2), i(3) },
       { delimiters = '@#' }
     ),
     { condition = conds_expand.line_begin }

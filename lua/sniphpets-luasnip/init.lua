@@ -25,6 +25,9 @@ function M.setup(opts)
   if M.config.eloquent.enabled then
     table.insert(paths, snippets_path .. '/eloquent')
   end
+  if M.config.joomla.enabled then
+    table.insert(paths, snippets_path .. '/joomla')
+  end
 
   require('luasnip.loaders.from_lua').lazy_load({
     paths = paths,

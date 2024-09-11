@@ -27,6 +27,10 @@ local defaults = {
     enabled = false,
     prefix = 'el',
   },
+  joomla = {
+    enabled = false,
+    prefix = 'jo',
+  },
 }
 
 function M.create_config(opts)

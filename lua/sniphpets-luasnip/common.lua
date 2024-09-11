@@ -117,4 +117,8 @@ function M.visual(_, snip)
   return v
 end
 
+function M.ucfirst(str)
+  return str:gsub('^%l', string.upper)
+end
+
 return M

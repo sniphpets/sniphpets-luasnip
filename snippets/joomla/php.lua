@@ -78,7 +78,7 @@ use Joomla\Database\ParameterType;
         $pk = $pk ?? (int) $this->getState('item.id');
 
         $db = $this->getDatabase();
-        $query = $db->getQuery(true);
+        $query = $db->createQuery();
 
         $query->select('*')
             ->from($db->quoteName('#__@!', '@!'))
@@ -115,7 +115,7 @@ use Joomla\Database\DatabaseQuery;
     protected function getListQuery(): DatabaseQuery|string
     {
         $db = $this->getDatabase();
-        $query = $db->getQuery(true);
+        $query = $db->createQuery();
 
         $query->select('*')
             ->from($db->quoteName('#__@!', '@!'))
@@ -157,7 +157,7 @@ use Joomla\CMS\Router\Route;
     fmt(
       [[
 $db = $this->getDatabase();
-$query = $db->getQuery(true);
+$query = $db->createQuery();
 
 $query->@#
   ]],

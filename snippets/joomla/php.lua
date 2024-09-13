@@ -11,6 +11,18 @@ local function table_alias()
   return common.basename():sub(1, 1):lower()
 end
 
+local function is_controller()
+  return common.basename():sub(-10) == 'Controller'
+end
+
+local function get_app()
+  if is_controller() then
+    return '$this->app'
+  end
+
+  return 'Factory::getApplication()'
+end
+
 return {
   s(
     {
@@ -171,17 +183,35 @@ $query->@#
     trig = prefix .. 'qv',
     name = 'Joomla: Quote value',
     dscr = 'Joomla: Quote value',
-  }, fmt([[$db->quote('@#')@#]], { i(1), i(0) }, { delimiters = '@#' }), {}),
+  }, fmt([[$db->quote('@#')@#]], { i(1), i(0) }, { delimiters = '@#' })),
 
   s({
     trig = prefix .. 'qn',
     name = 'Joomla: Quote name',
     dscr = 'Joomla: Quote name',
-  }, fmt([[$db->quoteName('@#')@#]], { i(1), i(0) }, { delimiters = '@#' }), {}),
+  }, fmt([[$db->quoteName('@#')@#]], { i(1), i(0) }, { delimiters = '@#' })),
+
+  s({
+    trig = prefix .. 'app',
+    name = 'Joomla: Application',
+    dscr = 'Joomla: Get application instance',
+  }, f(get_app)),
+
+  s({
+    trig = prefix .. 'db',
+    name = 'Joomla: Database',
+    dscr = 'Joomla: Get database instance',
+  }, t([[Factory::getContainer()->get(DatabaseInterface::class)]])),
+
+  s({
+    trig = prefix .. 'get',
+    name = 'Joomla: Service',
+    dscr = 'Joomla: Get service instance',
+  }, fmt([[Factory::getContainer()->get(@#::class)@#]], { i(1), i(0) }, { delimiters = '@#' })),
 
   s({
     trig = prefix .. 'route',
     name = 'Joomla: Route',
-    dscr = 'Joomla: Route URL',
-  }, fmt([[Route::_('index.php?option=com_@#')@#]], { i(1), i(0) }, { delimiters = '@#' }), {}),
+    dscr = 'Joomla: Generate route URL',
+  }, fmt([[Route::_('index.php?option=com_@#')@#]], { i(1), i(0) }, { delimiters = '@#' })),
 }

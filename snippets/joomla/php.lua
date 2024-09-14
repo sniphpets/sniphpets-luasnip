@@ -63,6 +63,8 @@ use Joomla\CMS\MVC\View\HtmlView as BaseHtmlView;
     public function display($tpl = null): void
     {
         @#
+
+        parent::display($tpl);
     }
 }
   ]], { f(namespace), f(base), i(0) }, { delimiters = '@#' }),

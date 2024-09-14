@@ -48,6 +48,24 @@ function M.extension_info(path)
     }
   end
 
+  pos, len = path:find('plg_[%w_]+')
+  if pos then
+    local fullname = path:sub(pos + 4, len)
+    local name = nil
+    local group = nil
+    group, name = fullname:match('(%w+)_(%w+)')
+    if name == nil then
+      name = fullname
+      group = 'content'
+    end
+    return {
+      type = 'plugin',
+      group = group,
+      name = name,
+      client = client,
+    }
+  end
+
   return {
     type = 'component',
     name = 'MyComponent',

@@ -58,6 +58,18 @@ describe('sniphpets-luasnip.joomla', function()
       assert.are.same('plugin', info.type)
       assert.are.same('logout', info.name)
       assert.are.same('system', info.group)
+
+      info = joomla.extension_info(
+        '/home/user/projects/joomla/plg_system_logout/src/Extension/Logout.php'
+      )
+      assert.are.same('plugin', info.type)
+      assert.are.same('logout', info.name)
+      assert.are.same('system', info.group)
+
+      info = joomla.extension_info('/home/user/projects/joomla/plg_logout/src/Extension/Logout.php')
+      assert.are.same('plugin', info.type)
+      assert.are.same('logout', info.name)
+      assert.are.same('content', info.group)
     end)
   end)
 end)

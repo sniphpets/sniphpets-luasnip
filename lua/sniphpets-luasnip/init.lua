@@ -1,4 +1,5 @@
 local create_config = require('sniphpets-luasnip.config').create_config
+local loaders = require('luasnip.loaders.from_lua')
 
 local M = {}
 
@@ -29,9 +30,16 @@ function M.setup(opts)
     table.insert(paths, snippets_path .. '/joomla')
   end
 
-  require('luasnip.loaders.from_lua').lazy_load({
+  local loader_opts = {
     paths = paths,
-  })
+    default_priority = M.config.priority,
+  }
+
+  if M.config.lazy then
+    loaders.lazy_load(loader_opts)
+  else
+    loaders.load(loader_opts)
+  end
 end
 
 function M.root()

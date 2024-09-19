@@ -46,7 +46,7 @@ namespace @#;
       [[
  public function __construct(@#)
  {
-    @#@#
+     @#@#
  }
   ]],
       { i(1), f(visual), i(0) },
@@ -61,7 +61,7 @@ namespace @#;
       [[
  public function __@#(@#)
  {
-    @#@#
+     @#@#
  }
   ]],
       { i(1, 'toString'), i(2), f(visual), i(0) },
@@ -90,7 +90,7 @@ f: final
       [[
  @# function @#(@#): @#
  {
-    @#@#
+     @#@#
  }
   ]],
       { f(method_visibility), i(1), i(2), i(3, 'void'), f(visual), i(0) },

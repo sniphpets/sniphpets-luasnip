@@ -10,35 +10,30 @@ function M.setup(opts)
 
   local snippets_path = M.root() .. '/snippets'
 
-  local paths = {}
-  if M.config.common.enabled then
-    table.insert(paths, snippets_path .. '/common')
-  end
-  if M.config.phpunit.enabled then
-    table.insert(paths, snippets_path .. '/phpunit')
-  end
-  if M.config.symfony.enabled then
-    table.insert(paths, snippets_path .. '/symfony')
-  end
-  if M.config.doctrine.enabled then
-    table.insert(paths, snippets_path .. '/doctrine')
-  end
-  if M.config.eloquent.enabled then
-    table.insert(paths, snippets_path .. '/eloquent')
-  end
-  if M.config.joomla.enabled then
-    table.insert(paths, snippets_path .. '/joomla')
-  end
-
-  local loader_opts = {
-    paths = paths,
-    default_priority = M.config.priority,
+  local snippets = {
+    'common',
+    'phpunit',
+    'symfony',
+    'doctrine',
+    'eloquent',
+    'joomla',
   }
 
-  if M.config.lazy then
-    loaders.lazy_load(loader_opts)
-  else
-    loaders.load(loader_opts)
+  for _, name in ipairs(snippets) do
+    local config = M.config[name]
+
+    if config.enabled or false then
+      local loader_opts = {
+        paths = snippets_path .. '/' .. name,
+        default_priority = config.priority or M.config.priority or 1000,
+      }
+
+      if config.lazy or M.config.lazy or true then
+        loaders.lazy_load(loader_opts)
+      else
+        loaders.load(loader_opts)
+      end
+    end
   end
 end
 

@@ -1,7 +1,7 @@
 local M = {}
 
 local defaults = {
-  lazy = false,
+  lazy = true,
   priority = 1000,
   file_header = '<?php\n\n',
   namespace_prefix = 'App',

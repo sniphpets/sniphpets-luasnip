@@ -44,10 +44,10 @@ namespace @#;
     { trig = prefix .. 'mc', name = 'Constructor', dscr = 'Class constructor' },
     fmt(
       [[
- public function __construct(@#)
- {
-     @#@#
- }
+public function __construct(@#)
+{
+    @#@#
+}
   ]],
       { i(1), f(visual), i(0) },
       { delimiters = '@#' }
@@ -59,10 +59,10 @@ namespace @#;
     { trig = prefix .. 'mm', name = 'Magic method', dscr = 'Class magic method' },
     fmt(
       [[
- public function __@#(@#)
- {
-     @#@#
- }
+public function __@#(@#)
+{
+    @#@#
+}
   ]],
       { i(1, 'toString'), i(2), f(visual), i(0) },
       { delimiters = '@#' }
@@ -88,10 +88,10 @@ f: final
     },
     fmt(
       [[
- @# function @#(@#): @#
- {
-     @#@#
- }
+@# function @#(@#): @#
+{
+    @#@#
+}
   ]],
       { f(method_visibility), i(1), i(2), i(3, 'void'), f(visual), i(0) },
       { delimiters = '@#' }
@@ -118,4 +118,64 @@ r: readonly
     fmt([[@# @# $@#]], { f(property_visibility), i(1, 'string'), i(0) }, { delimiters = '@#' }),
     { condition = conds_expand.line_begin }
   ),
+
+  s(
+    {
+      trig = prefix .. 'if',
+      name = 'If block',
+      dscr = 'If block',
+    },
+    fmt(
+      [[
+if (@#) {
+    @#@#
+}
+  ]],
+      { i(1), f(visual), i(0) },
+      { delimiters = '@#' }
+    ),
+    { condition = conds_expand.line_begin }
+  ),
+
+  s(
+    {
+      trig = prefix .. 'while',
+      name = 'While block',
+      dscr = 'While block',
+    },
+    fmt(
+      [[
+while (@#) {
+    @#@#
+}
+  ]],
+      { i(1), f(visual), i(0) },
+      { delimiters = '@#' }
+    ),
+    { condition = conds_expand.line_begin }
+  ),
+
+  s(
+    {
+      trig = prefix .. 'do',
+      name = 'Do while block',
+      dscr = 'Do while block',
+    },
+    fmt(
+      [[
+do {
+    @#@#
+} while (@#);
+  ]],
+      { i(0), f(visual), i(1) },
+      { delimiters = '@#' }
+    ),
+    { condition = conds_expand.line_begin }
+  ),
+
+  s({
+    trig = prefix .. 'fn',
+    name = 'Arrow function',
+    dscr = 'Arrow function',
+  }, fmt([[fn(@#) => @#]], { i(1), i(2) }, { delimiters = '@#' })),
 }

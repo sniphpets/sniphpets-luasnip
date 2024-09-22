@@ -19,9 +19,13 @@ end
 -- @param suffix string The suffix to remove from the filename. Defaults to an empty string.
 -- @return string The base name of the file.
 function M.basename(suffix)
-  suffix = suffix or ''
+  local basename = vim.fn.expand('%:t:r')
 
-  return vim.fn.expand('%:t:r'):gsub(suffix .. '$', '', 1)
+  if suffix then
+    basename = basename:gsub(suffix .. '$', '', 1)
+  end
+
+  return basename
 end
 
 --- Returns the filepath of the current file.

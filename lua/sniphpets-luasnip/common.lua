@@ -2,37 +2,42 @@ local config = require('sniphpets-luasnip').config
 
 local M = {}
 
+--- Returns the base name of a current file, including its type (class, interface, etc.).
+-- @return string The base name of the file.
 function M.base()
   local basename = M.basename()
-  local type = 'class'
+  local type = M.snippet_type(basename)
 
-  if basename:match('Interface$') then
-    type = 'interface'
-  elseif basename:match('Trait$') then
-    type = 'trait'
-  elseif basename:match('^Abstract') then
-    type = 'abstract class'
-  elseif config.final_classes then
+  if type == 'class' and config.final_classes then
     type = 'final class'
   end
 
   return type .. ' ' .. basename
 end
 
-function M.basename()
-  return vim.fn.expand('%:t:r')
+--- Returns the base name of a current file, removing an extension and specified suffix.
+-- @param suffix string The suffix to remove from the filename. Defaults to an empty string.
+-- @return string The base name of the file.
+function M.basename(suffix)
+  suffix = suffix or ''
+
+  return vim.fn.expand('%:t:r'):gsub(suffix .. '$', '', 1)
 end
 
+--- Returns the filepath of the current file.
+-- @return string The filepath of the current file.
+function M.filepath()
+  return vim.fn.expand('%:p')
+end
+
+--- Returns the fully qualified name of the current file.
+-- @return string Fully qualified name of the current file.
 function M.fqn()
   return M.path_to_fqn(M.filepath(), config.namespace_prefix)
 end
 
 function M.namespace()
   return M.path_to_namespace(M.filepath(), config.namespace_prefix)
-end
-
-function M.filepath()
-  return vim.fn.expand('%:p')
 end
 
 function M.path_to_namespace(path, namespace_prefix)
@@ -69,6 +74,21 @@ function M.file_header()
   end
 
   return header
+end
+
+--- Returns the type of a current file (class, interface, etc.).
+-- @param basename string The base name of the file.
+-- @return string The type of the file.
+function M.snippet_type(basename)
+  if basename:match('Interface$') then
+    return 'interface'
+  elseif basename:match('Trait$') then
+    return 'trait'
+  elseif basename:match('^Abstract') then
+    return 'abstract class'
+  end
+
+  return 'class'
 end
 
 function M.method_visibility(_, snip)
@@ -117,6 +137,7 @@ function M.visual(_, snip)
   return v
 end
 
+--- Uppercase the first letter of a string.
 function M.ucfirst(str)
   return str:gsub('^%l', string.upper)
 end

@@ -1,5 +1,4 @@
 local create_config = require('sniphpets-luasnip.config').create_config
-local loaders = require('luasnip.loaders.from_lua')
 
 local M = {}
 
@@ -9,6 +8,7 @@ function M.setup(opts)
   M.config = create_config(opts)
 
   local snippets_path = M.root() .. '/snippets'
+  local loaders = require('luasnip.loaders.from_lua')
 
   local snippets = {
     'common',

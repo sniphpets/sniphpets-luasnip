@@ -146,4 +146,9 @@ function M.ucfirst(str)
   return str:gsub('^%l', string.upper)
 end
 
+--- Lowercase the first letter of a string.
+function M.lcfirst(str)
+  return str:gsub('^%u', string.lower)
+end
+
 return M

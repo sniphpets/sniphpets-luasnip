@@ -14,6 +14,7 @@ function M.setup(opts)
     'common',
     'phpunit',
     'symfony',
+    'laravel',
     'doctrine',
     'eloquent',
     'joomla',

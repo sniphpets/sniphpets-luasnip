@@ -43,7 +43,7 @@ describe('sniphpets-luasnip', function()
       return basename
     end
 
-    it('uses "class" by default', function()
+    it('returns file type', function()
       basename = 'User'
       assert.are.same('class User', base())
     end)
@@ -54,25 +54,30 @@ describe('sniphpets-luasnip', function()
       assert.are.same('final class User', base())
     end)
 
-    it('detects abstract classes', function()
-      basename = 'AbstractUser'
-      assert.are.same('abstract class AbstractUser', base())
-    end)
-
     it('never makes abstract class final', function()
       config.final_classes = true
       basename = 'AbstractUser'
       assert.are.same('abstract class AbstractUser', base())
     end)
+  end)
+
+  describe('snippet_type()', function()
+    local snippet_type = common.snippet_type
+
+    it('detects classes', function()
+      assert.are.same('class', snippet_type('User'))
+    end)
+
+    it('detects abstract classes', function()
+      assert.are.same('abstract class', snippet_type('AbstractUser'))
+    end)
 
     it('detects interfaces', function()
-      basename = 'UserInterface'
-      assert.are.same('interface UserInterface', base())
+      assert.are.same('interface', snippet_type('UserInterface'))
     end)
 
     it('detects traits', function()
-      basename = 'UserTrait'
-      assert.are.same('trait UserTrait', base())
+      assert.are.same('trait', snippet_type('UserTrait'))
     end)
   end)
 
@@ -91,6 +96,16 @@ describe('sniphpets-luasnip', function()
     it('enables strict types', function()
       config.strict_types = true
       assert.are.same('<?php\n\ndeclare(strict_types=1);\n\n', file_header())
+    end)
+  end)
+
+  describe('ucfirst()', function()
+    local ucfirst = common.ucfirst
+
+    it('returns a capitalized first character', function()
+      assert.are.same('User', ucfirst('user'))
+      assert.are.same('User', ucfirst('User'))
+      assert.are.same('', ucfirst(''))
     end)
   end)
 end)

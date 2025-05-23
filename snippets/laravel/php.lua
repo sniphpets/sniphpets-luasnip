@@ -15,6 +15,40 @@ local file_header = common.file_header()
 return {
   s(
     {
+      trig = prefix .. 'get',
+      name = 'Laravel: Route::get',
+      dscr = 'Laravel: Route::get',
+    },
+    fmt(
+      [[
+    Route::get('@#', @#);
+    ]],
+      { i(1), i(0) },
+      { delimiters = '@#' }
+    ),
+    { condition = conds_expand.line_begin }
+  ),
+
+  s(
+    {
+      trig = prefix .. 'getf',
+      name = 'Laravel: Route::get',
+      dscr = 'Laravel: Route::get',
+    },
+    fmt(
+      [[
+    Route::get('@#', function () {
+        @#
+    });
+    ]],
+      { i(1), i(0) },
+      { delimiters = '@#' }
+    ),
+    { condition = conds_expand.line_begin }
+  ),
+
+  s(
+    {
       trig = prefix .. 'controller',
       name = 'Laravel: Controller',
       dscr = 'Laravel: Controller class',

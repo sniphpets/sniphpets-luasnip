@@ -134,7 +134,7 @@ end
 function M.visual(_, snip)
   local v = snip.env.LS_SELECT_RAW
 
-  if #v > 0 then
+  if v[1] ~= nil then
     v[1] = v[1]:gsub('^%s+', '')
   end
 

@@ -49,6 +49,56 @@ return {
 
   s(
     {
+      trig = prefix .. 'route',
+      name = 'Laravel: Route',
+      dscr = 'Laravel: Route',
+    },
+    fmt(
+      [[
+    Route::@#('@#', @#);
+    ]],
+      { i(1), i(2), i(0) },
+      { delimiters = '@#' }
+    ),
+    { condition = conds_expand.line_begin }
+  ),
+
+  s(
+    {
+      trig = prefix .. 'routef',
+      name = 'Laravel: Route',
+      dscr = 'Laravel: Route',
+    },
+    fmt(
+      [[
+    Route::@#('@#', function () {
+        @#
+    });
+    ]],
+      { i(1), i(2), i(0) },
+      { delimiters = '@#' }
+    ),
+    { condition = conds_expand.line_begin }
+  ),
+
+  s(
+    {
+      trig = prefix .. 'view',
+      name = 'Laravel: return view()',
+      dscr = 'Laravel: return view()',
+    },
+    fmt(
+      [[
+    return view('@#');
+    ]],
+      { i(1) },
+      { delimiters = '@#' }
+    ),
+    { condition = conds_expand.line_begin }
+  ),
+
+  s(
+    {
       trig = prefix .. 'controller',
       name = 'Laravel: Controller',
       dscr = 'Laravel: Controller class',

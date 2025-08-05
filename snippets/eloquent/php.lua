@@ -94,13 +94,14 @@ use Illuminate\Database\Eloquent\Model;
     { trig = prefix .. 'scope', name = 'Eloquent: Model scope', dscr = 'Eloquent: Model scope' },
     fmt(
       [[
- public function scope@#(Builder $query@#): void
+ #[Scope]
+ protected function @!(Builder $query@!): void
  {
-    $query->@#@#
+    $query->@!@!
  }
   ]],
       { i(1), i(2), f(visual), i(3) },
-      { delimiters = '@#' }
+      { delimiters = '@!' }
     ),
     { condition = conds_expand.line_begin }
   ),
@@ -187,6 +188,22 @@ use Illuminate\Database\Eloquent\Model;
 
   s(
     {
+      trig = prefix .. 'col',
+      name = 'Eloquent: $table-> column',
+      dscr = 'Eloquent: $table-> column',
+    },
+    fmt(
+      [[
+ $table->@#('@#')@#;
+  ]],
+      { i(1), i(2), i(3) },
+      { delimiters = '@#' }
+    ),
+    { condition = conds_expand.line_begin }
+  ),
+
+  s(
+    {
       trig = prefix .. 'string',
       name = 'Eloquent: $table->string',
       dscr = 'Eloquent: $table->sting',
@@ -209,7 +226,7 @@ use Illuminate\Database\Eloquent\Model;
     },
     fmt(
       [[
- $table->foreignId('@#_id')->constrained()@#;
+ $table->foreignId('@#_id')->constrained()->cascadeOnDelete()@#;
   ]],
       { i(1), i(2) },
       { delimiters = '@#' }

@@ -28,28 +28,36 @@ use Illuminate\Database\Eloquent\Model;
   ),
 
   s(
-    { trig = prefix .. 'fillable', name = 'Eloquent: $fillable', dscr = 'Eloquent: $fillable' },
+    {
+      trig = prefix .. 'fillable',
+      name = 'Eloquent: $fillable',
+      dscr = 'Eloquent: $fillable',
+    },
     fmt(
       [[
  protected $fillable = [
      '@#',@#
  ];
   ]],
-      { i(1), i(2) },
+      { i(1), i(0) },
       { delimiters = '@#' }
     ),
     { condition = conds_expand.line_begin }
   ),
 
   s(
-    { trig = prefix .. 'guarded', name = 'Eloquent: $guarded', dscr = 'Eloquent: $guarded' },
+    {
+      trig = prefix .. 'guarded',
+      name = 'Eloquent: $guarded',
+      dscr = 'Eloquent: $guarded',
+    },
     fmt(
       [[
  protected $guarded = [
      '@#',@#
  ];
   ]],
-      { i(1), i(2) },
+      { i(1), i(0) },
       { delimiters = '@#' }
     ),
     { condition = conds_expand.line_begin }
@@ -67,14 +75,18 @@ use Illuminate\Database\Eloquent\Model;
      '@#' => @#,@#
  ];
   ]],
-      { i(1), i(2), i(3) },
+      { i(1), i(2), i(0) },
       { delimiters = '@#' }
     ),
     { condition = conds_expand.line_begin }
   ),
 
   s(
-    { trig = prefix .. 'casts', name = 'Eloquent: Casts', dscr = 'Eloquent: Casts' },
+    {
+      trig = prefix .. 'casts',
+      name = 'Eloquent: Casts',
+      dscr = 'Eloquent: Casts',
+    },
     fmt(
       [[
  protected function casts(): array
@@ -84,14 +96,18 @@ use Illuminate\Database\Eloquent\Model;
      ];
  }
   ]],
-      { i(1), i(2), i(3) },
+      { i(1), i(2), i(0) },
       { delimiters = '@#' }
     ),
     { condition = conds_expand.line_begin }
   ),
 
   s(
-    { trig = prefix .. 'scope', name = 'Eloquent: Model scope', dscr = 'Eloquent: Model scope' },
+    {
+      trig = prefix .. 'scope',
+      name = 'Eloquent: Model scope',
+      dscr = 'Eloquent: Model scope',
+    },
     fmt(
       [[
  #[Scope]
@@ -189,8 +205,8 @@ use Illuminate\Database\Eloquent\Model;
   s(
     {
       trig = prefix .. 'col',
-      name = 'Eloquent: $table-> column',
-      dscr = 'Eloquent: $table-> column',
+      name = 'Eloquent: $table->...',
+      dscr = 'Eloquent: $table->...',
     },
     fmt(
       [[
@@ -204,13 +220,45 @@ use Illuminate\Database\Eloquent\Model;
 
   s(
     {
-      trig = prefix .. 'string',
+      trig = prefix .. 'str',
       name = 'Eloquent: $table->string',
-      dscr = 'Eloquent: $table->sting',
+      dscr = 'Eloquent: $table->string',
     },
     fmt(
       [[
  $table->string('@#')@#;
+  ]],
+      { i(1), i(2) },
+      { delimiters = '@#' }
+    ),
+    { condition = conds_expand.line_begin }
+  ),
+
+  s(
+    {
+      trig = prefix .. 'text',
+      name = 'Eloquent: $table->text',
+      dscr = 'Eloquent: $table->text',
+    },
+    fmt(
+      [[
+ $table->text('@#')@#;
+  ]],
+      { i(1), i(2) },
+      { delimiters = '@#' }
+    ),
+    { condition = conds_expand.line_begin }
+  ),
+
+  s(
+    {
+      trig = prefix .. 'int',
+      name = 'Eloquent: $table->integer',
+      dscr = 'Eloquent: $table->integer',
+    },
+    fmt(
+      [[
+ $table->integer('@#')@#;
   ]],
       { i(1), i(2) },
       { delimiters = '@#' }
@@ -226,9 +274,50 @@ use Illuminate\Database\Eloquent\Model;
     },
     fmt(
       [[
- $table->foreignId('@#_id')->constrained()->cascadeOnDelete()@#;
+ $table->foreignId('@#_id')->constrained()->cascadeOnDelete();
   ]],
-      { i(1), i(2) },
+      { i(1) },
+      { delimiters = '@#' }
+    ),
+    { condition = conds_expand.line_begin }
+  ),
+
+  s(
+    {
+      trig = prefix .. 'schema',
+      name = 'Eloquent: Schema::create()',
+      dscr = 'Eloquent: Schema::create()',
+    },
+    fmt(
+      [[
+ Schema::@#('@#', function (Blueprint $table) {
+    @#
+ });
+  ]],
+      { i(1, 'create'), i(2), i(0) },
+      { delimiters = '@#' }
+    ),
+    { condition = conds_expand.line_begin }
+  ),
+
+  s(
+    {
+      trig = prefix .. 'state',
+      name = 'Eloquent: factory state',
+      dscr = 'Eloquent: factory state',
+    },
+    fmt(
+      [[
+ public function @#(): Factory
+ {
+     return $this->state(function (array $attributes) {
+         return [
+             @#,
+         ];
+     });
+ }
+  ]],
+      { i(1), i(0) },
       { delimiters = '@#' }
     ),
     { condition = conds_expand.line_begin }

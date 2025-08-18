@@ -204,6 +204,44 @@ use Illuminate\Database\Eloquent\Model;
 
   s(
     {
+      trig = prefix .. 'hasthrough',
+      name = 'Eloquent: Model HasOneThrough/HasManyThrough',
+      dscr = 'Eloquent: Model HasOneThrough/HasManyThrough relation',
+    },
+    fmt(
+      [[
+ public function @#(): Has@#Through
+ {
+    return $this->has@#Through(@#::class, @#::class);
+ }
+  ]],
+      { i(1), rep(2), i(2), i(3), i(4) },
+      { delimiters = '@#' }
+    ),
+    { condition = conds_expand.line_begin }
+  ),
+
+  s(
+    {
+      trig = prefix .. 'through',
+      name = 'Eloquent: Model through()->has()',
+      dscr = 'Eloquent: Model HasOneThrough/HasManyThrough relation',
+    },
+    fmt(
+      [[
+ public function @#(): Has@#Through
+ {
+    return $this->through('@#')->has('@#');
+ }
+  ]],
+      { i(1), i(2), i(3), i(4) },
+      { delimiters = '@#' }
+    ),
+    { condition = conds_expand.line_begin }
+  ),
+
+  s(
+    {
       trig = prefix .. 'col',
       name = 'Eloquent: $table->...',
       dscr = 'Eloquent: $table->...',

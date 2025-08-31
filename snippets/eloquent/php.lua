@@ -242,6 +242,25 @@ use Illuminate\Database\Eloquent\Model;
 
   s(
     {
+      trig = prefix .. 'morph',
+      name = 'Eloquent: Model morph',
+      dscr = 'Eloquent: Model MorphOne/MorphMany relation',
+    },
+    fmt(
+      [[
+ public function @#(): Morph@#
+ {
+    return $this->morph@#(@#::class, '@#');
+ }
+  ]],
+      { i(1), rep(2), i(2), i(3), i(4) },
+      { delimiters = '@#' }
+    ),
+    { condition = conds_expand.line_begin }
+  ),
+
+  s(
+    {
       trig = prefix .. 'col',
       name = 'Eloquent: $table->...',
       dscr = 'Eloquent: $table->...',

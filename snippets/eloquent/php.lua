@@ -261,6 +261,25 @@ use Illuminate\Database\Eloquent\Model;
 
   s(
     {
+      trig = prefix .. 'morphto',
+      name = 'Eloquent: Model morphTo',
+      dscr = 'Eloquent: Model morphTo relation',
+    },
+    fmt(
+      [[
+ public function @#(): MorphTo
+ {
+    return $this->morphTo();
+ }
+  ]],
+      { i(1) },
+      { delimiters = '@#' }
+    ),
+    { condition = conds_expand.line_begin }
+  ),
+
+  s(
+    {
       trig = prefix .. 'col',
       name = 'Eloquent: $table->...',
       dscr = 'Eloquent: $table->...',
